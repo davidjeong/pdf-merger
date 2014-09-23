@@ -1,9 +1,13 @@
 package org.pdfmerger.gui.controllers;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.pdfbox.exceptions.COSVisitorException;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.util.PDFMergerUtility;
 import org.pdfmerger.gui.Constants;
 
 import javafx.event.ActionEvent;
@@ -28,27 +32,29 @@ public class MainController implements Initializable {
 	@FXML private Label fileName2;
 	@FXML private Button select1;
 	@FXML private Button select2;
-	
+
 	private FileChooser fc;
-	
+
 	private File file1;
 	private File file2;
-	
-	
+
+	private File destinationFile;
+
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		generateFileChooser();
 	}
-	
+
 	private void generateFileChooser() {
 		fc = new FileChooser();
 		fc.setTitle(Constants.FILE_CHOOSER_TITLE);
 		fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(Constants.PDF, Constants.PDF_EXTENSION));
 	}
-	
+
 	public void createHandlers(Stage stage) {
-		
+
 		select1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -59,40 +65,50 @@ public class MainController implements Initializable {
 				}
 			}
 		});
-		
+
 		select2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				file2 = fc.showOpenDialog(stage);
-				if (file1 != null) {
+				if (file2 != null) {
 					fileName2.textProperty().setValue(file2.getName());
 					System.out.println(file2.getPath());
 				}
 			}
 		});
-		
+
 		generate.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("generate clicked.");
-				generatePDF();
+				if (checkValid()) {
+					destinationFile = fc.showSaveDialog(stage);
+					if (destinationFile != null) {
+						generatePDF();
+					}
+				}
 				event.consume();
 			}
 		});
 	}
-	
-	private void generatePDF() {
-		if (file1 == null && file2 == null) {
-			System.out.println("Both empty");
-			return;
-		}
-		else if (file1 == null) {
-			//file 1 is eimpty
-			return;
-		}
-		else if (file2 == null) {
-			return;	
-		}
+
+	private boolean checkValid() {
+		return (file1 != null && file2 != null);
 	}
 
+	private void generatePDF() {
+		PDFMergerUtility utility = new PDFMergerUtility();
+		utility.addSource(file1);
+		utility.addSource(file2);
+		utility.setDestinationFileName(destinationFile.getPath());
+		try {
+			utility.mergeDocuments();
+		}
+		catch (IOException ie) {
+			System.out.println("Caught IOException");
+		}
+		catch (COSVisitorException cve) {
+			System.out.println("Caught COSVistorException");
+		}
+	}
 }
