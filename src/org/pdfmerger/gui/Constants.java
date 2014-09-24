@@ -8,6 +8,7 @@ package org.pdfmerger.gui;
 public class Constants {
 
 	public static String APPLICATION_NAME = "PDF MERGER";
+	public static String APPLICATION_ICON = "pdf_icon.ico";
 	public static String AUTHOR = "David Jeong";
 	
 	public static String PDF = "Adobe Acrobat Document";

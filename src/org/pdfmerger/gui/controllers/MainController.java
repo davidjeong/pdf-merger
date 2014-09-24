@@ -66,7 +66,7 @@ public class MainController implements Initializable {
 	 * Method which creates the handlers needed by the controller.
 	 * @param stage {@link Stage} for the main window.
 	 */
-	public void createHandlers(Stage stage) {
+	public void createHandlers(final Stage stage) {
 		
 		listView.setCellFactory(new Callback<ListView<File>, ListCell<File>>() {
 			@Override

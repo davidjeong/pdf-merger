@@ -32,7 +32,7 @@ public class Main extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.initStyle(StageStyle.UTILITY);
 			primaryStage.setTitle(Constants.APPLICATION_NAME);
-			primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("styles/icons/pdf_icon_32x32.png")));
+			primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("styles/icons/" + Constants.APPLICATION_ICON)));
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
