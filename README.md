@@ -1,5 +1,6 @@
 pdf-merger
 ==========
+*DO NOT USE YET*
 
 Application which merges two pdf together.
 Basic functionality works
