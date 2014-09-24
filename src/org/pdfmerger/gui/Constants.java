@@ -7,9 +7,13 @@ package org.pdfmerger.gui;
  */
 public class Constants {
 
-	public static String FILE_CHOOSER_TITLE = "Choose a PDF file.";
+	public static String APPLICATION_NAME = "PDF MERGER";
+	public static String AUTHOR = "David Jeong";
+	
 	public static String PDF = "PDF";
 	public static String PDF_EXTENSION = "*.pdf";
+	
+	public static String FILE_CHOOSER_TITLE = "Choose a PDF file.";
 	public static String PDF_GENERATE = "Generate!";
 	public static String PDF_IN_PROGRESS = "Merging in progress...";
 	public static String PDF_MERGED = "PDF Merged!";

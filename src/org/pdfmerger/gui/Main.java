@@ -5,8 +5,10 @@ import org.pdfmerger.gui.controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 /**
  * Main method which application loads the main.fxml
@@ -27,9 +29,10 @@ public class Main extends Application {
 			
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			
 			primaryStage.setResizable(false);
-			
+			primaryStage.initStyle(StageStyle.UTILITY);
+			primaryStage.setTitle(Constants.APPLICATION_NAME);
+			primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("styles/icons/pdf_icon_32x32.png")));
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
