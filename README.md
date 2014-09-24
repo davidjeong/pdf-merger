@@ -1,4 +1,4 @@
-pdf-merger
+PDF Merger
 ==========
 
 This application was created because I needed a program to merge my cover letter and my resume into one package, 
