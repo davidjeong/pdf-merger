@@ -11,7 +11,6 @@ import org.pdfmerger.gui.Constants;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -55,7 +54,6 @@ public class MainController implements Initializable {
 
 	private void generateFileChooser() {
 		fc = new FileChooser();
-		fc.setTitle(Constants.FILE_CHOOSER_TITLE);
 		fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(Constants.PDF, Constants.PDF_EXTENSION));
 	}
 
@@ -68,6 +66,7 @@ public class MainController implements Initializable {
 		select1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				fc.setTitle(Constants.FILE_CHOOSER_OPEN);
 				file1 = fc.showOpenDialog(stage);
 				if (file1 != null) {
 					fileName1.textProperty().setValue(file1.getName());
@@ -82,6 +81,7 @@ public class MainController implements Initializable {
 		select2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				fc.setTitle(Constants.FILE_CHOOSER_OPEN);
 				file2 = fc.showOpenDialog(stage);
 				if (file2 != null) {
 					fileName2.textProperty().setValue(file2.getName());
@@ -97,6 +97,7 @@ public class MainController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				if (checkValid()) {
+					fc.setTitle(Constants.FILE_CHOOSER_SAVE);
 					destinationFile = fc.showSaveDialog(stage);
 					if (destinationFile != null) {
 						service = createTask();
