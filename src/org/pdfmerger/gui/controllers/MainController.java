@@ -11,8 +11,6 @@ import org.apache.pdfbox.util.PDFMergerUtility;
 import org.pdfmerger.gui.Constants;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +20,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -33,14 +35,16 @@ import javafx.util.Callback;
  */
 public class MainController implements Initializable {
 
+	@FXML private AnchorPane gui;
 	@FXML private GridPane gridPane;
 	@FXML private ListView<File> listView;
 	@FXML private Button generate;
 	@FXML private Button selectButton;
+	@FXML private Button up;
+	@FXML private Button down;
 	@FXML private ProgressBar progress;
 
 	private FileChooser fc;
-	private ObservableList<File> fileList; 
 
 	private File destinationFile;
 	private boolean generated;
@@ -50,7 +54,6 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		fileList = FXCollections.observableArrayList();
 		generateFileChooser();
 	}
 
@@ -80,19 +83,73 @@ public class MainController implements Initializable {
 			}
 		});
 		
+		gui.setOnDragOver(new EventHandler<DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				if (db.hasFiles()) {
+					event.acceptTransferModes(TransferMode.ANY);
+				} else {
+					event.consume();
+				}
+			}
+		});
+		
+		gui.setOnDragDropped(new EventHandler<DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				boolean success = false;
+				if (db.hasFiles()) {
+					success = true;
+					listView.getItems().addAll(db.getFiles());
+				}
+				event.setDropCompleted(success);
+				event.consume();
+			}
+		});
+		
 		selectButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				fc.setTitle(Constants.FILE_CHOOSER_OPEN);
 				List<File> tempList = fc.showOpenMultipleDialog(stage);
-				if (fileList != null) {
-					fileList.addAll(tempList);
+				if (tempList != null) {
 					listView.getItems().addAll(tempList);
 					if (generated) {
 						generated = false;
 						generate.textProperty().setValue(Constants.PDF_GENERATE);
 					}
 				}
+				event.consume();
+			}
+		});
+		
+		up.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				int selected = listView.getSelectionModel().getSelectedIndex();
+				if (selected != 0) {
+					File tmp = listView.getItems().get(selected - 1);
+					listView.getItems().set(selected - 1, listView.getSelectionModel().getSelectedItem());
+					listView.getItems().set(selected, tmp);
+					listView.getSelectionModel().select(selected - 1);
+				}
+				event.consume();
+			}
+		});
+		
+		down.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				int selected = listView.getSelectionModel().getSelectedIndex();
+				if (selected != listView.getItems().size() - 1) {
+					File tmp = listView.getItems().get(selected + 1);
+					listView.getItems().set(selected + 1, listView.getSelectionModel().getSelectedItem());
+					listView.getItems().set(selected, tmp);
+					listView.getSelectionModel().select(selected + 1);
+				}
+				event.consume();
 			}
 		});
 
@@ -131,7 +188,7 @@ public class MainController implements Initializable {
 	}
 
 	private boolean checkValid() {
-		return (!fileList.isEmpty());
+		return (!listView.getItems().isEmpty());
 	}
 
 	/**
@@ -139,7 +196,7 @@ public class MainController implements Initializable {
 	 */
 	private void generatePDF() {
 		PDFMergerUtility utility = new PDFMergerUtility();
-		for (File file : fileList) {
+		for (File file : listView.getItems()) {
 			utility.addSource(file);
 		}
 		utility.setDestinationFileName(destinationFile.getPath());
