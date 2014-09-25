@@ -29,6 +29,6 @@ More features to come!
 * Automatic file opening upon task completion.
 
 
-The self-contained installer executable could be found [here](https://www.dropbox.com/s/x2tds5heq47vsuu/PDF%20Merger-1.0.1.zip?dl=0).
+The self-contained installer executable could be found [here](https://www.dropbox.com/s/sgv29oydtnkhff2/PDF%20Merger-1.0.1.exe?dl=0).
 ```
-You need to unzip the file using the password: pdf123.
+There is a minor problem where chrome automatically blocks the file upon downloading, this is a false positive. If you want, you can email me at djeong747@gmail.com and I will email you the file.
