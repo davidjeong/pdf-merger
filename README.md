@@ -31,4 +31,4 @@ More features to come!
 
 The self-contained installer executable could be found [here](https://www.dropbox.com/s/x2tds5heq47vsuu/PDF%20Merger-1.0.1.zip?dl=0).
 ```
-You need to unzip the file using the password: **pdf123**.
+You need to unzip the file using the password: pdf123.
