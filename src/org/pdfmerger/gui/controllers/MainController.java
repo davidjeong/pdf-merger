@@ -4,6 +4,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -66,6 +68,8 @@ public class MainController implements Initializable {
 	private ContextMenu context;
 	private MenuItem remove;
 	private MenuItem properties;
+	
+	private BasicFileAttributes attr;
 
 
 	@Override
@@ -73,6 +77,9 @@ public class MainController implements Initializable {
 		generateFileChooser();
 	}
 
+	/**
+	 * Method which generates and set up the file chooser.
+	 */
 	private void generateFileChooser() {
 		fc = new FileChooser();
 		fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(Constants.PDF, Constants.PDF_EXTENSION));
@@ -129,7 +136,6 @@ public class MainController implements Initializable {
 										});
 
 										properties = new MenuItem();
-										properties.setDisable(true); //Disable this for now.f
 										properties.textProperty().setValue(Constants.PROPERTIES);
 										properties.setOnAction(new EventHandler<ActionEvent>() {
 											@Override
@@ -137,12 +143,21 @@ public class MainController implements Initializable {
 												FXMLLoader loader = null;
 												Parent root = null;
 												try {
-													// TODO FXML not loading due to nullpointer
 													loader = new FXMLLoader(this.getClass().getResource("../views/properties.fxml"));
 													root = (Parent)loader.load();
 
-													//PropertiesController controller = (PropertiesController)loader.getController();
-													//controller.populateFields(item);
+													PropertiesController controller = (PropertiesController)loader.getController();
+													
+													attr = Files.readAttributes(item.toPath(), BasicFileAttributes.class);
+													
+													String fileName = item.getName();
+													String filePath = item.getPath();
+													String fileSize = String.valueOf(item.length());
+													String lastModified = attr.lastModifiedTime().toString();
+													String created = attr.creationTime().toString();
+													String accessed = attr.lastAccessTime().toString();
+													
+													controller.populateFields(fileName, filePath, fileSize, lastModified, created, accessed);
 
 													Scene window = new Scene(root);
 													Stage stage = new Stage();

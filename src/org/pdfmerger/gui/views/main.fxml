@@ -45,7 +45,7 @@
          </children>
       </GridPane>
       <Button fx:id="generate" alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="235.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Generate!" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="35.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="120.0" text="EZ PDF Merger" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="35.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="120.0" text="PDF Merger" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
