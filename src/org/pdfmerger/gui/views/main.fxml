@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
 
 <AnchorPane fx:id="gui" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pdfmerger.gui.controllers.MainController">
    <children>
@@ -21,6 +22,9 @@
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
+               <items>
+               		<FXCollections fx:id="fileList" fx:factory="observableArrayList" />
+               </items>
             </ListView>
             <GridPane GridPane.columnIndex="1">
               <columnConstraints>
@@ -47,10 +51,5 @@
          </font>
       </Label>
       <ProgressBar fx:id="progress" layoutX="311.0" layoutY="254.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" progress="0.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="15.0" />
-      <Label layoutX="286.0" layoutY="280.0" text="Created using JavaFX" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
-         <font>
-            <Font size="9.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

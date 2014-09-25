@@ -3,9 +3,12 @@ package org.pdfmerger.gui;
 import org.pdfmerger.gui.controllers.MainController;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -34,6 +37,14 @@ public class Main extends Application {
 			primaryStage.setTitle(Constants.APPLICATION_NAME);
 			primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("styles/icons/" + Constants.APPLICATION_ICON)));
 			primaryStage.show();
+			
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent event) {
+					Platform.exit();
+				}
+			});
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -42,4 +53,5 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }
