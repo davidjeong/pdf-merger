@@ -161,7 +161,11 @@ public class MainController implements Initializable {
 
 													Scene window = new Scene(root);
 													Stage stage = new Stage();
-													stage.initStyle(StageStyle.UTILITY);
+													
+													if (Constants.OPERATING_SYSTEM.startsWith("Windows")) {
+														stage.initStyle(StageStyle.UTILITY);
+													}
+													
 													stage.setResizable(false);
 													stage.setScene(window);
 													stage.show();

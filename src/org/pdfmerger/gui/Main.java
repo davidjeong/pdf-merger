@@ -23,6 +23,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		Parent root = null;
 		FXMLLoader loader = null;
+		
+		if (Constants.OPERATING_SYSTEM.isEmpty()) {
+			Constants.OPERATING_SYSTEM = System.getProperty("os.name");
+		}
+		
 		try {
 			loader = new FXMLLoader(this.getClass().getResource("views/main.fxml"));
 			root = (Parent)loader.load();
@@ -33,7 +38,12 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
-			primaryStage.initStyle(StageStyle.UTILITY);
+			
+			// Check if operating system is Windows. If true, set the style to Utility.
+			if (Constants.OPERATING_SYSTEM.startsWith("Windows")) {
+				primaryStage.initStyle(StageStyle.UTILITY);
+			}
+			
 			primaryStage.setTitle(Constants.APPLICATION_NAME);
 			primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("styles/icons/" + Constants.APPLICATION_ICON)));
 			primaryStage.show();

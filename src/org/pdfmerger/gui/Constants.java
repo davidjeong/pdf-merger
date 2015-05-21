@@ -23,4 +23,5 @@ public class Constants {
 	public static String PDF_IN_PROGRESS = "Merging in progress...";
 	public static String PDF_MERGED = "PDF Merged!";
 		
+	public static String OPERATING_SYSTEM = "";
 }

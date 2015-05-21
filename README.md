@@ -29,6 +29,6 @@ More features to come!
 * Automatic file opening upon task completion.
 
 
-The self-contained installer executable could be found [here](https://www.dropbox.com/s/sgv29oydtnkhff2/PDF%20Merger-1.0.1.exe?dl=0).
+The self-contained installer executable could be found [Windows](https://www.dropbox.com/s/sgv29oydtnkhff2/PDF%20Merger-1.0.1.exe?dl=0), [Mac](https://www.dropbox.com/s/28jv0zkpv219ac6/PDF%20Merger-1.0.1.dmg?dl=0).
 ```
 There is a minor problem where chrome automatically blocks the file upon downloading, this is a false positive. If you want, you can email me at djeong747@gmail.com and I will email you the file.
