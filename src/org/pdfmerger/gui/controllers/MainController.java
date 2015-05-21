@@ -74,6 +74,9 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		// Begin with disabled button.
+		generate.setDisable(true);
 		generateFileChooser();
 	}
 
@@ -95,7 +98,7 @@ public class MainController implements Initializable {
 			@Override
 			public void onChanged(
 					javafx.collections.ListChangeListener.Change<? extends File> c) {
-				if (fileList.size() == 0) {
+				if (fileList.size() <= 1) {
 					generate.setDisable(true);
 				}
 				else {
