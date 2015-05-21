@@ -17,7 +17,7 @@ public class Constants {
 	public static String REMOVE = "Remove File";
 	public static String PROPERTIES = "Properties";
 	
-	public static String FILE_CHOOSER_OPEN = "Choose a PDF file.";
+	public static String FILE_CHOOSER_OPEN = "Choose PDF files.";
 	public static String FILE_CHOOSER_SAVE = "Choose a save location.";
 	public static String PDF_GENERATE = "Generate!";
 	public static String PDF_IN_PROGRESS = "Merging in progress...";

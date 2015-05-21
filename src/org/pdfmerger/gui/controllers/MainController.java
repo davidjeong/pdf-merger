@@ -98,6 +98,9 @@ public class MainController implements Initializable {
 			@Override
 			public void onChanged(
 					javafx.collections.ListChangeListener.Change<? extends File> c) {
+				if (generate.textProperty().getValue().equals(Constants.PDF_MERGED)) {
+					generate.textProperty().setValue(Constants.PDF_GENERATE);
+				}
 				if (fileList.size() <= 1) {
 					generate.setDisable(true);
 				}
