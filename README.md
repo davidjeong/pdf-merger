@@ -4,6 +4,8 @@ PDF Merger
 This application was created because I needed a program to merge my cover letter and my resume into one package, 
 so that it can be uploaded unto Jobmine. However, I did not want to use the online services as I did not want my personal information to be uploaded to random servers.
 
+--DISCLAIMER-- By NO MEANS is this program to be used by others. It was created solely for my personal use; therefore, licensing might not be completely reflective of the third party libraries used.
+
 Latest version is **1.0.1**.
 
 Basically, it is a program which merges multiple PDF files together.
