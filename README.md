@@ -18,6 +18,8 @@ More features to come!
 * Dynamically change order of pages.
 
 **Change Log**
+*Version 1.0.2 (2016/01/19)*
+* Fixed a bug with ArrayIndexOutOfBounds.
 
 *Version 1.0.1 (2014/09/25)*
 * Support for drag and drop capabilities.
