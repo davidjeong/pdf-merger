@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_pdf-merger" default="compile.module.pdf-merger">
+  <dirname property="module.pdf-merger.basedir" file="${ant.file.module_pdf-merger}"/>
+  
+  <property name="module.jdk.home.pdf-merger" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.pdf-merger" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.pdf-merger" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.pdf-merger" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="pdf-merger.output.dir" value="${module.pdf-merger.basedir}/out/production/pdf-merger"/>
+  <property name="pdf-merger.testoutput.dir" value="${module.pdf-merger.basedir}/out/test/pdf-merger"/>
+  
+  <path id="pdf-merger.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="pdf-merger.module.production.classpath">
+    <path refid="${module.jdk.classpath.pdf-merger}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="pdf-merger.runtime.production.module.classpath">
+    <pathelement location="${pdf-merger.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="pdf-merger.module.classpath">
+    <path refid="${module.jdk.classpath.pdf-merger}"/>
+    <pathelement location="${pdf-merger.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="pdf-merger.runtime.module.classpath">
+    <pathelement location="${pdf-merger.testoutput.dir}"/>
+    <pathelement location="${pdf-merger.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.pdf-merger">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.pdf-merger">
+    <patternset refid="excluded.from.module.pdf-merger"/>
+  </patternset>
+  
+  <path id="pdf-merger.module.sourcepath">
+    <dirset dir="${module.pdf-merger.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.pdf-merger" depends="compile.module.pdf-merger.production,compile.module.pdf-merger.tests" description="Compile module pdf-merger"/>
+  
+  <target name="compile.module.pdf-merger.production" depends="register.custom.compilers" description="Compile module pdf-merger; production classes">
+    <mkdir dir="${pdf-merger.output.dir}"/>
+    <javac2 destdir="${pdf-merger.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.pdf-merger}/javac">
+      <compilerarg line="${compiler.args.pdf-merger}"/>
+      <bootclasspath refid="pdf-merger.module.bootclasspath"/>
+      <classpath refid="pdf-merger.module.production.classpath"/>
+      <src refid="pdf-merger.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.pdf-merger"/>
+    </javac2>
+    
+    <copy todir="${pdf-merger.output.dir}">
+      <fileset dir="${module.pdf-merger.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.pdf-merger.tests" depends="register.custom.compilers,compile.module.pdf-merger.production" description="compile module pdf-merger; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.pdf-merger" description="cleanup module">
+    <delete dir="${pdf-merger.output.dir}"/>
+    <delete dir="${pdf-merger.testoutput.dir}"/>
+  </target>
+</project>
