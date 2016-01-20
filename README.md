@@ -18,6 +18,7 @@ More features to come!
 * Dynamically change order of pages.
 
 **Change Log**
+
 *Version 1.0.2 (2016/01/19)*
 * Fixed a bug with ArrayIndexOutOfBounds.
 
@@ -31,6 +32,6 @@ More features to come!
 * Progress bar notify of completion.
 * Automatic file opening upon task completion.
 
-To build the application and run it on your machine, you can either download the [JavaFXApp](https://www.dropbox.com/s/hx67sujlbsirhq0/JavaFXApp.zip?dl=0) or build it using intelliJ.
+To build the application and run it on your machine, you need to install Intellij and import the project. In the future standalone packages will be provided.
 ```
 There is a minor problem where chrome automatically blocks the file upon downloading, this is a false positive.
